@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect("mongodb://localhost:27017/local");
+mongoose.connect("mongodb://localhost:27017/EJERCICIO_MONGO");
 
 const db = mongoose.connection;
 
