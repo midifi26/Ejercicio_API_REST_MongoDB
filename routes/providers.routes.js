@@ -1,6 +1,11 @@
-// const providersControllers = require("../controllers/providers.controller");
+const providersController = require('../controllers/providers.controller.js');
+const router = require('express').Router();
 
-// const router = require("express").Router();
-// router.get("/", providersControllers.diHola);
+router.get("/{:id}", providersController.getProvider);
+router.post("/", providersController.createProvider);
+router.put("/", providersController.editProvider);
 
-// module.exports = router;
+
+
+module.exports = router;
+

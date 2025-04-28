@@ -1,19 +1,58 @@
-// /* const diHola = (req, res) => {
-//   try {
-//    /*  req.body
-//     req.params
-//     req.query */
-//     //peticiones a schemas mongo
+const providerService = require("../services/providers.services.js");
 
+// CREATE
+const createProvider = async (req, res) => {
+  console.log(req.body);
 
-//     res.status(200).json({ msg: "Hola Michelle!" });
-//   } catch (error) {
-//     res.status(500).json(error);
-//   }
-// };
+  try {
+    const data = req.body;
+    let answer = await providerService.createProvider(data);
+    res.status(201).json(answer);
+  } catch (error) {
+    console.log(`ERROR: ${error.stack}`);
+    res.status(400).json({ msj: `ERROR: ${error.stack}` });
+  }
+};
 
-// const controllers = {
-//   diHola
-// };
+// READ
+const getProvider = async (req, res) => {
+  try {
+    const id = req.params.id;
+    let providers = await providerService.getProvider(id);
+    res.status(200).json(providers);
+  } catch (error) {
+    console.log(`ERROR: ${error.stack}`);
+    res.status(400).json({ msj: `ERROR: ${error.stack}` });
+  }
+};
 
-// module.exports = controllers;
+// UPDATE
+const editProvider = async (req, res) => {
+  try {
+    const data = req.body;
+    let answer = await providerService.editProvider(data);
+    res.status(200).json(answer);
+  } catch (error) {
+    console.log(`ERROR: ${error.stack}`);
+    res.status(400).json({ msj: `ERROR: ${error.stack}` });
+  }
+};
+
+// DELETE
+const deleteProvider = async (req, res) => {
+  try {
+    const { company_name } = req.body;
+    let answer = await providerService.deleteProvider(company_name);
+    res.status(200).json(answer);
+  } catch (error) {
+    console.log(`ERROR: ${error.stack}`);
+    res.status(400).json({ msj: `ERROR: ${error.stack}` });
+  }
+};
+
+module.exports = {
+  createProvider,
+  getProvider,
+  editProvider,
+  deleteProvider,
+};

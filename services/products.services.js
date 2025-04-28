@@ -1,5 +1,5 @@
 const Product = require("../models/products.model");
-const Provider = require("../models/provider.model");
+const Provider = require("../models/providers.model");
 
 async function createProduct({
   title,
@@ -34,10 +34,35 @@ async function getProduct(id) {
     console.log(`ERROR: ${error.stack}`);
   }
 }
+// UPDATE
+async function editProduct({ id, title, price, description, company_name }) {
+  try {
+    let updateData = { title, price, description };
+
+    if (company_name) {
+      const provider = await Provider.findOne({ company_name });
+      if (!provider) throw new Error("Proveedor no encontrado");
+      updateData.provider = provider._id;
+    }
+
+    const updatedProduct = await Product.findByIdAndUpdate(id, updateData, { new: true });
+
+    if (!updatedProduct) throw new Error("Producto no encontrado.");
+
+    return {
+      message: `Producto actualizado: ${title}`,
+      product: updatedProduct,
+    };
+  } catch (error) {
+    console.log(`ERROR: ${error.stack}`);
+    throw new Error("No se pudo actualizar el producto.");
+  }
+}
+
 
 module.exports = {
   createProduct,
   getProduct,
-  // editProduct,
-  // deleteProduct
+  editProduct,
+  //deleteProduct,
 };

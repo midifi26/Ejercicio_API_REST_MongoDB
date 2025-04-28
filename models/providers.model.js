@@ -108,3 +108,19 @@ p6.save()
 })
 p7.save()
 .then((data)=>console.log(data));*/
+
+/*const p8 = new Provider({
+
+    "company_name": "La Casa de las flores",
+    "CIF": "B45696894",
+    "address": "Calle Benita Lopez 31",
+    "url_web":"https://www.lacasadelasflores.com",
+})
+p8.save()
+.then((data)=>console.log(data));*/
+
+//Ejemplo de update en providers
+/*{
+    "id": "680a66f3baec103e04c01677", //id_providers
+    "company_name": "Autoescuela Toretto"
+  }*/
